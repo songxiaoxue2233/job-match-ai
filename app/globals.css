@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7fafc;
+  --foreground: #172033;
+  --panel: rgba(255, 255, 255, 0.82);
+  --line: rgba(148, 163, 184, 0.22);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), "Microsoft YaHei", sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+.bg-flowing {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 22% 10%, rgba(37, 99, 235, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 20%, rgba(13, 148, 136, 0.13), transparent 26%),
+    radial-gradient(circle at 52% 88%, rgba(15, 23, 42, 0.055), transparent 30%),
+    linear-gradient(135deg, #fbfdff 0%, #eef7f6 52%, #f8fafc 100%);
+}
+
+.bg-flowing::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black, transparent 72%);
+  opacity: 0.72;
+}
+
+.bg-flowing::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  top: 18%;
+  width: min(42vw, 520px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.13), rgba(20, 184, 166, 0.09));
+  filter: blur(46px);
+  animation: drift 11s ease-in-out infinite alternate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.018) 1px, transparent 1px);
+  background-size: 8px 8px;
+  opacity: 0.36;
+}
+
+.surface {
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  background: var(--panel);
+  box-shadow:
+    0 24px 80px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(22px);
+}
+
+.quiet-card {
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.045);
+}
+
+.animate-rise {
+  animation: rise 700ms ease-out both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-28px, 34px, 0) scale(1.06);
+  }
+}
