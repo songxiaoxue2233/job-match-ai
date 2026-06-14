@@ -630,6 +630,9 @@ export default function Home() {
                     {analysisReport.jobRecommendations?.length ? (
                       <div>
                         <p className="text-sm font-black text-slate-800">推荐岗位方向</p>
+                        <p className="mt-2 text-xs font-bold leading-6 text-slate-500">
+  以下为 AI 根据简历生成的岗位方向建议，并非平台实时招聘岗位。点击 BOSS / 实习僧按钮可前往招聘平台查看真实岗位。
+</p>
                         <div className="mt-3 grid gap-5 lg:grid-cols-2">
                           {analysisReport.jobRecommendations.map((job) => (
                             <article
