@@ -760,7 +760,7 @@ export default function Home() {
                     </p>
                     <h4 className="mt-2 text-xl font-black text-slate-900">简历重构编辑器</h4>
                     <p className="mt-2 text-sm font-semibold leading-6 text-slate-500">
-                      生成一版更贴近目标岗位的简历，你可以直接在网页里修改。
+                      作为一名资深 HR，我们会参考 STAR 法则来重构您的简历；对于实习或项目经历，尽量用数据量化您的产出贡献，以此突出您的核心能力。生成后您可以直接在网页里修改。
                     </p>
                   </div>
                   <button
