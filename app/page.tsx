@@ -339,20 +339,15 @@ export default function Home() {
               智能匹配
             </a>
             <a className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600" href="#">
-              成功案例
-            </a>
-            <a className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600" href="#">
               产品功能
-            </a>
-            <a className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600" href="#">
-              价格方案
-            </a>
-            <button
-              className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600"
-              onClick={() => setShowHistory(true)}
-            >
-              帮助中心
-            </button>
+            <a
+  className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600"
+  href="https://tally.so/r/obx0J1"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  帮助中心
+</a>
           </nav>
 
           {user ? (
