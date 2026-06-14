@@ -473,22 +473,6 @@ export default function Home() {
                     {isReadingPdf ? "正在读取文件文字..." : fileName ? "点击可更换文件" : "AI 将自动识别你的核心优势"}
                   </p>
                 </label>
-                {resumeText ? (
-                  <div className="quiet-card rounded-2xl p-5">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
-                      简历文字预览
-                    </p>
-                    <pre className="mt-3 max-h-28 overflow-hidden whitespace-pre-wrap break-words rounded-xl bg-white/70 p-4 font-sans text-xs font-semibold leading-6 text-slate-600">
-                      {resumeText
-                        .split("\n")
-                        .map((line) => line.trim())
-                        .filter(Boolean)
-                        .slice(0, 6)
-                        .join("\n")}
-                      {resumeText.split("\n").filter((line) => line.trim()).length > 6 ? "\n..." : ""}
-                    </pre>
-                  </div>
-                ) : null}
                 {pdfReadFailed ? (
                   <div className="space-y-3 rounded-2xl border border-amber-100 bg-amber-50/70 p-5 shadow-sm">
                     <div>
@@ -671,15 +655,9 @@ export default function Home() {
                                 {job.matchReason}
                               </p>
 
-                              <div className="mt-6 grid grid-cols-2 gap-3">
+                              <div className="mt-6">
                                 <button
-                                  className="rounded-2xl bg-blue-50 px-4 py-3 text-sm font-black text-blue-600 transition-all hover:bg-blue-100"
-                                  onClick={rewriteResume}
-                                >
-                                  简历重构
-                                </button>
-                                <button
-                                  className="rounded-2xl bg-slate-950 px-4 py-3 text-sm font-black text-white shadow-lg shadow-slate-950/15 transition-all hover:bg-blue-700"
+                                  className="w-full rounded-2xl bg-slate-950 px-4 py-3 text-sm font-black text-white shadow-lg shadow-slate-950/15 transition-all hover:bg-blue-700"
                                   onClick={() => setSelectedJob(job)}
                                 >
                                   岗位详情
