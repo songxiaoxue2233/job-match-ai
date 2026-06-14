@@ -335,20 +335,22 @@ export default function Home() {
           </div>
 
           <nav className="hidden h-full items-center gap-8 text-sm font-bold text-slate-600 md:flex">
-            <a className="flex h-full items-center border-b-2 border-blue-600 px-1 text-blue-600" href="#">
-              智能匹配
-            </a>
-            <a className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600" href="#">
-              产品功能
-            <a
-  className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600"
-  href="https://tally.so/r/obx0J1"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  帮助中心
-</a>
-          </nav>
+  <a
+    className="flex h-full items-center border-b-2 border-blue-600 px-1 text-blue-600"
+    href="#match-form"
+  >
+    智能匹配
+  </a>
+
+  <a
+    className="flex h-full items-center border-b-2 border-transparent px-1 transition-colors hover:text-blue-600"
+    href="https://tally.so/r/obx0J1"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    帮助中心
+  </a>
+</nav>
 
           {user ? (
             <div className="flex items-center gap-2">
