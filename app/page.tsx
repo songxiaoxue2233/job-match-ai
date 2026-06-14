@@ -41,6 +41,14 @@ type DemoUser = {
   email: string;
 };
 
+function getBossSearchUrl(keyword: string) {
+  return `https://www.zhipin.com/web/geek/job?query=${encodeURIComponent(keyword)}`;
+}
+
+function getShixisengSearchUrl(keyword: string) {
+  return `https://www.shixiseng.com/interns?keyword=${encodeURIComponent(keyword)}`;
+}
+
 export default function Home() {
   const [fileName, setFileName] = useState("");
   const [expectation, setExpectation] = useState("");
@@ -677,6 +685,25 @@ export default function Home() {
                                   岗位详情
                                 </button>
                               </div>
+                              
+                              <div className="mt-3 grid grid-cols-2 gap-3">
+  <a
+    className="rounded-2xl border border-blue-100 bg-white px-4 py-3 text-center text-sm font-black text-blue-700 transition-all hover:border-blue-200 hover:bg-blue-50"
+    href={getBossSearchUrl(job.title)}
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    去 BOSS 搜索
+  </a>
+  <a
+    className="rounded-2xl border border-teal-100 bg-white px-4 py-3 text-center text-sm font-black text-teal-700 transition-all hover:border-teal-200 hover:bg-teal-50"
+    href={getShixisengSearchUrl(job.title)}
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    去实习僧搜索
+  </a>
+</div>
                             </article>
                           ))}
                         </div>
