@@ -549,7 +549,7 @@ export default function Home() {
                 </label>
                 <textarea
                   className="h-40 w-full resize-none rounded-[2rem] border border-slate-200 bg-white/60 p-6 text-base font-semibold leading-7 text-slate-700 shadow-inner outline-none transition-all placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
-                  placeholder="例如：北京 AI 产品经理，20k 以上，希望偏增长、数据分析、AIGC 产品方向..."
+                  placeholder="例如：北京产品经理，20k 以上，希望偏增长、数据分析、AIGC 产品方向..."
                   value={expectation}
                   onChange={(event) => {
                     setExpectation(event.target.value);
@@ -760,7 +760,7 @@ export default function Home() {
                     </p>
                     <h4 className="mt-2 text-xl font-black text-slate-900">简历重构编辑器</h4>
                     <p className="mt-2 text-sm font-semibold leading-6 text-slate-500">
-                      作为一名资深 HR，我们会参考 STAR 法则来重构您的简历；对于实习或项目经历，尽量用数据量化您的产出贡献，以此突出您的核心能力。生成后您可以直接在网页里修改。
+                      作为一名资深 HR，我们会参考 STAR 法则来重构您的简历；对于实习或项目经历，尽量用数据量化您的产出贡献，以此突出您的核心能力（我们并不会伪造您的经历）。生成后您可以直接在网页里修改。
                     </p>
                   </div>
                   <button
@@ -981,9 +981,6 @@ export default function Home() {
 
       <footer className="relative z-10 mt-8 border-t border-white/50 bg-white/55 py-10 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col items-center px-4 text-center">
-          <a className="font-bold text-slate-400 transition-colors hover:text-blue-600" href="mailto:hello@example.com">
-            联系开发者 / 反馈建议
-          </a>
           <p className="mt-4 text-xs font-bold uppercase tracking-widest text-slate-400">
             © 2026 JobMatch AI · Experiential Trial Version
           </p>
