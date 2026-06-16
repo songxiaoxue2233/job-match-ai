@@ -13,7 +13,13 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { resumeText, expectation, jobType = "不限" } = await request.json();
+    const {
+  resumeText,
+  expectation,
+  targetJd = "",
+  selectedJob = null,
+  jobType = "不限",
+} = await request.json();
 
     if (!resumeText || !expectation) {
       return NextResponse.json({ error: "缺少简历文字或职业期待" }, { status: 400 });
