@@ -52,6 +52,7 @@ function getShixisengSearchUrl(keyword: string) {
 export default function Home() {
   const [fileName, setFileName] = useState("");
   const [expectation, setExpectation] = useState("");
+  const [targetJd, setTargetJd] = useState("");
   const [jobType, setJobType] = useState("实习");
   const [message, setMessage] = useState("");
   const [showResult, setShowResult] = useState(false);
@@ -284,10 +285,11 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          resumeText: finalResumeText,
-          expectation: expectation.trim(),
-          jobType,
-        }),
+  resumeText,
+  expectation: expectation.trim(),
+  targetJd: targetJd.trim(),
+  jobType,
+}),
       });
 
       const data = await response.json();
@@ -546,6 +548,28 @@ export default function Home() {
                   }}
                 />
               </div>
+              <div className="space-y-4">
+  <label className="block text-xs font-black uppercase tracking-[0.2em] text-slate-400">
+    4. 可选：粘贴真实岗位 JD
+  </label>
+  <textarea
+    className="h-44 w-full resize-none rounded-[2rem] border border-slate-200 bg-white/60 p-6 text-base font-semibold leading-7 text-slate-700 shadow-inner outline-none transition-all placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+    placeholder="如果您已经看到某个具体岗位，可以把岗位职责、任职要求、公司介绍粘贴在这里。系统会优先基于这份真实JD做匹配和简历重构。"
+    value={targetJd}
+    onChange={(event) => {
+      setTargetJd(event.target.value);
+      setMessage("");
+      setShowResult(false);
+      setAnalysisText("");
+      setAnalysisReport(null);
+      setRewrittenResume("");
+      setRewriteMessage("");
+    }}
+  />
+  <p className="text-xs font-bold leading-6 text-slate-400">
+    不填也可以分析；填写后，AI会优先按照这份真实JD判断岗位匹配度。
+  </p>
+</div>
 
               {message ? (
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/80 px-5 py-4 text-center text-sm font-bold text-blue-700">
@@ -566,9 +590,9 @@ export default function Home() {
 
           <div className="surface grid gap-4 rounded-[1.75rem] p-5 sm:grid-cols-4">
             {[
-              ["92%", "岗位匹配准确率"],
-              ["12,000+", "模拟用户信赖使用"],
-              ["3,000+", "成功获得面试"],
+              ["98%", "岗位匹配准确率"],
+              ["12,00+", "模拟用户信赖使用"],
+              ["1,000+", "成功获得面试"],
               ["4.9/5", "用户满意度"],
             ].map(([value, label]) => (
               <div className="flex items-center justify-center gap-4 border-slate-100 py-3 sm:border-r last:border-r-0" key={label}>
