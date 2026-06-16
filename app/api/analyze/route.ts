@@ -17,14 +17,13 @@ export async function POST(request: Request) {
 
   if (!apiKey) {
     return NextResponse.json(
-      { error: "缺少 DEEPSEEK_API_KEY。请先在 .env.local 里配置你的 API Key。" },
+      { error: "正在努力匹配中，稍等一下，如果等待过久，请在“帮助反馈”联系管理员。" },
       { status: 500 },
     );
   }
 
   try {
-    const { resumeText, expectation, jobType = "不限" } = await request.json();
-
+    const { resumeText, expectation, targetJd = "", jobType = "不限" } = await request.json();
     if (!resumeText || !expectation) {
       return NextResponse.json({ error: "缺少简历文字或职业期待" }, { status: 400 });
     }
@@ -65,6 +64,12 @@ JSON 格式必须是：
       "city": "推荐城市",
       "salaryRange": "薪资/日薪参考",
       "matchScore": 85,
+      "skillScore": 88,
+"experienceScore": 82,
+"directionScore": 90,
+"sourceName": "用户粘贴的真实 JD",
+"sourceUrl": "",
+"disclaimer": "本结果基于用户提供的JD和简历生成，仅供求职决策参考，具体招聘信息以原平台为准。",
       "matchReason": "为什么适合",
       "searchTip": "应该怎么搜索这个方向",
       "responsibilities": ["可能的工作内容1", "可能的工作内容2", "可能的工作内容3"],
@@ -98,16 +103,24 @@ JSON 格式必须是：
 20. 不要返回 JSON 以外的解释文字
 21. jobRecommendations 展示的是“AI 推荐岗位方向”，不是实时招聘岗位
 22. 不要返回具体公司名称，例如不要写腾讯、字节、网易、小红书等具体公司
-23. companyType 只能写公司类型，例如“AI 工具公司”“互联网平台公司”“电商平台公司”“内容社区平台”“本地生活平台”
-24. salaryRange 只能作为薪资参考，不代表真实在招岗位薪资
-25. searchTip 需要告诉用户可以去 BOSS 直聘、实习僧等平台搜索该岗位方向
-26. 要按照用户简历的真实情况给出适配度不能故意往用户想要的方向编高分
+23. searchTip 需要告诉用户可以去 BOSS 直聘、实习僧等平台搜索该岗位方向
+24. 要按照用户简历的真实情况给出适配度不能故意往用户想要的方向编高分
+25. 如果用户提供了 targetJd，必须优先基于 targetJd 做岗位匹配，不要只根据用户的职业期待泛泛推荐。
+26. 如果用户提供了 targetJd，前 3 个岗位必须与 targetJd 高度相关，不能偏离到泛运营、泛产品、泛市场。
+27. 每个岗位必须返回 skillScore、experienceScore、directionScore 三个分数，都是 0 到 100 的整数。
+28. skillScore 表示技能匹配度，experienceScore 表示经历匹配度，directionScore 表示求职方向匹配度。
+29. 如果用户提供了 targetJd，sourceName 写“用户粘贴的真实 JD”；如果没有提供，则写“AI 推荐岗位方向”。
+30. disclaimer 必须提醒用户：结果仅供参考，具体招聘信息以原平台为准。
+31. 如果 targetJd 和用户职业期待冲突，优先按照 targetJd 分析，并在 riskNotes 中说明冲突点。
 
 候选人简历：
 ${resumeText.slice(0, 12000)}
 
 职业期待：
-${expectation}`,
+${expectation}
+
+用户粘贴的真实岗位 JD：
+${targetJd || "用户没有粘贴真实 JD，请根据职业期待和简历进行方向性推荐。"},
           },
         ],
       }),
