@@ -15,9 +15,7 @@ type AnalysisReport = {
 type JobRecommendation = {
   title: string;
   type?: string;
-  companyType?: string;
-  city?: string;
-  salaryRange?: string;
+  industryType?: string;
   matchScore?: number;
   matchReason: string;
   searchTip: string;
@@ -167,7 +165,7 @@ export default function Home() {
     ? {
         title: jobForRewrite.title,
         type: jobForRewrite.type,
-        companyType: jobForRewrite.companyType,
+        industryType: jobForRewrite.industryType,
         matchReason: jobForRewrite.matchReason,
         responsibilities: jobForRewrite.responsibilities,
         requirements: jobForRewrite.requirements,
@@ -642,7 +640,6 @@ export default function Home() {
                   <div className="mt-5 space-y-5">
                     <ReportBlock title="候选人画像" items={analysisReport.profileSummary} />
                     <ReportBlock title="核心优势" items={analysisReport.strengths} />
-                    <ReportBlock title="适合岗位方向" items={analysisReport.jobDirections} />
                     <ReportBlock title="简历优化建议" items={analysisReport.resumeSuggestions} />
                     <ReportBlock title="需要注意" items={analysisReport.riskNotes} />
                     {analysisReport.jobRecommendations?.length ? (
@@ -661,7 +658,7 @@ export default function Home() {
                                 <div className="min-w-0">
                                   <h4 className="text-xl font-black leading-snug text-slate-900">{job.title}</h4>
                                   <p className="mt-1 text-sm font-black text-blue-600">
-                                    {job.companyType || "适合关注的企业类型"}
+                                    {job.industrytype || "适合关注的行业类型"}
                                   </p>
                                 </div>
                                 <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-white shadow-lg ring-1 ring-slate-100">
@@ -674,12 +671,6 @@ export default function Home() {
                               </div>
 
                               <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-black">
-                                <span className="rounded-full bg-slate-100 px-3 py-1.5 text-slate-500">
-                                  {job.city || "城市待定"}
-                                </span>
-                                <span className="rounded-full bg-orange-50 px-3 py-1.5 text-orange-600 ring-1 ring-orange-100">
-                                  {job.salaryRange || "薪资参考待定"}
-                                </span>
                                 {job.type ? (
                                   <span className="rounded-full bg-blue-50 px-3 py-1.5 text-blue-600">
                                     {job.type}
@@ -920,13 +911,7 @@ export default function Home() {
                   <h3 className="mt-3 text-2xl font-black text-slate-900">{selectedJob.title}</h3>
                   <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">
                     <span className="rounded-full bg-blue-50 px-3 py-1.5 text-blue-700">
-                      {selectedJob.companyType || "企业类型待定"}
-                    </span>
-                    <span className="rounded-full bg-slate-100 px-3 py-1.5 text-slate-600">
-                      {selectedJob.city || "城市待定"}
-                    </span>
-                    <span className="rounded-full bg-orange-50 px-3 py-1.5 text-orange-600">
-                      {selectedJob.salaryRange || "薪资参考待定"}
+                      {selectedJob.industryType || "行业类型待定"}
                     </span>
                   </div>
                   <p className="mt-3 max-w-2xl text-sm font-semibold leading-7 text-slate-600">
@@ -953,7 +938,7 @@ export default function Home() {
               <div className="rounded-2xl border border-amber-100 bg-amber-50/70 p-5">
                 <p className="text-sm font-black text-amber-800">说明</p>
                 <p className="mt-3 text-sm font-semibold leading-7 text-slate-700">
-                  这里展示的是岗位方向详情，不是某家公司真实 JD。后续接入真实招聘数据后，可以在这里展示公司、薪资、职责和投递链接。
+                  注意：这里展示的是岗位方向详情，不是某家公司真实 JD。
                 </p>
               </div>
             </div>
