@@ -137,7 +137,7 @@ export default function Home() {
     setRewriteMessage("");
   }
 
-  async function rewriteResume() {
+  async function rewriteResume(targetJob?: JobRecommendation) {
     if (!resumeText.trim()) {
       setRewriteMessage("请先上传并读取简历。");
       return;
@@ -150,6 +150,7 @@ export default function Home() {
 
     setIsRewriting(true);
     setRewriteMessage("AI 正在重构简历，请稍等...");
+    const jobForRewrite = targetJob || selectedJob;
 
     try {
       const response = await fetch("/api/rewrite-resume", {
@@ -158,10 +159,22 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          resumeText,
-          expectation,
-          jobType,
-        }),
+  resumeText,
+  expectation,
+  targetJd: targetJd.trim(),
+  jobType,
+  selectedJob: jobForRewrite
+    ? {
+        title: jobForRewrite.title,
+        type: jobForRewrite.type,
+        companyType: jobForRewrite.companyType,
+        matchReason: jobForRewrite.matchReason,
+        responsibilities: jobForRewrite.responsibilities,
+        requirements: jobForRewrite.requirements,
+        prepTips: jobForRewrite.prepTips,
+      }
+    : null,
+}),
       });
 
       const data = await response.json();
@@ -768,7 +781,7 @@ export default function Home() {
                   <button
                     className="rounded-full bg-teal-600 px-6 py-3 text-sm font-black text-white shadow-lg shadow-teal-600/20 transition-all hover:-translate-y-0.5 hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60"
                     disabled={isRewriting}
-                    onClick={rewriteResume}
+                    onClick={() => rewriteResume(job)}
                   >
                     {isRewriting ? "正在重构..." : "生成优化版简历"}
                   </button>
